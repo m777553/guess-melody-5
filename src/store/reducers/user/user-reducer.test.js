@@ -48,7 +48,7 @@ describe(`Async operation work correctly`, () => {
   it(`Should make a correct API call to /login`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const fakeUser = {login: `test@test.ru`, password: `123456`};
+    const fakeUser = {email: `test@test.ru`, password: `123456`};
     const questionLoader = login(fakeUser);
 
     apiMock

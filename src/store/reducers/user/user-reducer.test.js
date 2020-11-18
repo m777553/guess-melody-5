@@ -29,13 +29,13 @@ describe(`Async operation work correctly`, () => {
   it(`Should make a correct API call to /login`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const questionLoader = checkAuth();
+    const checkAuthLoader = checkAuth();
 
     apiMock
       .onGet(APIRoute.LOGIN)
       .reply(200, [{fake: true}]);
 
-    return questionLoader(dispatch, () => {}, api)
+    return checkAuthLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -48,14 +48,14 @@ describe(`Async operation work correctly`, () => {
   it(`Should make a correct API call to /login`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const fakeUser = {login: `test@test.ru`, password: `123456`};
-    const questionLoader = login(fakeUser);
+    const fakeUser = {email: `test@test.ru`, password: `123456`};
+    const loginLoader = login(fakeUser);
 
     apiMock
       .onPost(APIRoute.LOGIN)
       .reply(200, [{fake: true}]);
 
-    return questionLoader(dispatch, () => {}, api)
+    return loginLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
